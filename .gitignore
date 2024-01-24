@@ -24,3 +24,4 @@ pnpm-debug.log*
 
 # gitattributes
 * text=auto
+* text=auto eol=lf

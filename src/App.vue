@@ -8,6 +8,7 @@
       recusandae! Corrupti, dicta.
     </p>
     <font-awesome-icon icon="shopping-cart"></font-awesome-icon>
+    <price :value="4.23"></price>
   </div>
 </template>
 
@@ -15,6 +16,7 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import Price from "./components/Price.vue";
 
 library.add(faShoppingCart);
 
@@ -22,6 +24,7 @@ export default {
   name: "App",
   components: {
     FontAwesomeIcon,
+    Price,
   },
 };
 </script>
