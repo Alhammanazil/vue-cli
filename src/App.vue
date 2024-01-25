@@ -2,6 +2,8 @@
 <template>
   <div id="app" class="container mt-5">
     <h1>IDShop</h1>
+    <price-slider :sliderStatus="sliderStatus" v-model:maximum="maximum">
+    </price-slider>
     <product-list :products="products" :maximum="maximum" @add="addItem">
     </product-list>
   </div>
@@ -9,6 +11,7 @@
 
 <script>
 // import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import PriceSlider from "./components/PriceSlider.vue";
 import ProductList from "./components/ProductList.vue";
 
 // library.add(faShoppingCart);
@@ -17,12 +20,14 @@ export default {
   name: "App",
   data: function () {
     return {
-      maximum: 50,
+      maximum: 100,
       products: [],
       cart: [],
+      sliderStatus: true,
     };
   },
   components: {
+    PriceSlider,
     ProductList,
   },
   mounted: function () {
