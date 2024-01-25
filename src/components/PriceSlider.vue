@@ -6,7 +6,7 @@
         <input
           type="number"
           class="form-control mx-2"
-          style="width: 60px; text-align: center"
+          style="width: 75px; text-align: center"
           v-model="maxAmount"
           @change="$emit('update:maximum', maxAmount)"
         />

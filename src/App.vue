@@ -2,6 +2,13 @@
 <template>
   <div id="app" class="container mt-5">
     <h1>IDShop</h1>
+    <navbar
+      :cart="cart"
+      :cartQty="cartQty"
+      :cartTotal="cartTotal"
+      @toggle="toggleSliderStatus"
+      @delete="deleteItem"
+    ></navbar>
     <price-slider :sliderStatus="sliderStatus" v-model:maximum="maximum">
     </price-slider>
     <product-list :products="products" :maximum="maximum" @add="addItem">
@@ -10,23 +17,22 @@
 </template>
 
 <script>
-// import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import PriceSlider from "./components/PriceSlider.vue";
 import ProductList from "./components/ProductList.vue";
-
-// library.add(faShoppingCart);
+import Navbar from "./components/Navbar.vue";
 
 export default {
-  name: "App",
+  name: "app",
   data: function () {
     return {
       maximum: 100,
       products: [],
       cart: [],
-      sliderStatus: true,
+      sliderStatus: false,
     };
   },
   components: {
+    Navbar,
     PriceSlider,
     ProductList,
   },
@@ -37,7 +43,26 @@ export default {
         this.products = data;
       });
   },
+  computed: {
+    cartTotal: function () {
+      let sum = 0;
+      for (let key in this.cart) {
+        sum = sum + this.cart[key].product.price * this.cart[key].qty;
+      }
+      return sum;
+    },
+    cartQty: function () {
+      let qty = 0;
+      for (let key in this.cart) {
+        qty = qty + this.cart[key].qty;
+      }
+      return qty;
+    }
+  },
   methods: {
+    toggleSliderStatus: function () {
+      this.sliderStatus = !this.sliderStatus;
+    },
     addItem: function (product) {
       let productIndex;
       let productExist = this.cart.filter(function (item, index) {
@@ -53,6 +78,13 @@ export default {
         this.cart[productIndex].qty++;
       } else {
         this.cart.push({ product: product, qty: 1 });
+      }
+    },
+    deleteItem: function (id) {
+      if (this.cart[id].qty > 1) {
+        this.cart[id].qty--;
+      } else {
+        this.cart.splice(id, 1);
       }
     },
   },
