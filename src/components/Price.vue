@@ -16,7 +16,7 @@ export default {
     precision: {
       type: Number,
       default: 2,
-    },
-  },
+    }
+  }
 };
 </script>
