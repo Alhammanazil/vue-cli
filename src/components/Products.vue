@@ -11,9 +11,9 @@
 </template>
 
 <script>
+import Navbar from './Navbar.vue';
 import ProductList from './ProductList.vue';
 import PriceSlider from './PriceSlider.vue';
-import Navbar from './Navbar.vue';
 
 export default {
 	name: 'products',
